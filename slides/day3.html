@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-901 FDP · Day 3 — Foundations, Responsible AI, Foundry &amp; Vision</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="assets/theme.css">
+</head>
+<body>
+<div class="footer">AI-901 FDP · Day 3 · <a href="index.html">All decks</a></div>
+<div class="reveal"><div class="slides">
+
+<section data-auto-animate>
+  <span class="pill">DAY 3 · 07-Jul</span>
+  <h1>Foundations, Responsible AI,<br>Foundry &amp; Computer Vision</h1>
+  <p class="muted">Microsoft Certified: Azure AI Fundamentals — <strong>Exam AI-901</strong> (replaced AI-900, Apr 2026)</p>
+  <p class="tag">Domain 1 · Identify AI concepts (40–45%)</p> <p class="tag">Domain 2 · Implement in Foundry (55–60%)</p>
+</section>
+
+<section>
+  <h2>AI-901 is NOT AI-900</h2>
+  <div class="grid">
+    <div class="card"><h3>Old (AI-900, retired)</h3><ul>
+      <li>Individual services in isolation</li><li><strong>No coding</strong></li>
+      <li>Form Recognizer, LUIS, QnA Maker…</li></ul></div>
+    <div class="card"><h3>New (AI-901)</h3><ul>
+      <li>Build in <em>Microsoft Foundry</em></li><li>Assumes <strong>basic Python + SDK/REST</strong></li>
+      <li>Agents + <em>Content Understanding</em></li></ul></div>
+  </div>
+  <div class="trap">Teach <strong>lab-first</strong>. 55–60% of the exam is <em>implementing</em> in Foundry.</div>
+</section>
+
+<section>
+  <h2>Exam facts</h2>
+  <table>
+    <tr><th>Code</th><td>AI-901</td><th>Pass</th><td><strong>700 / 1000</strong> (scaled)</td></tr>
+    <tr><th>Questions</th><td>~40–60</td><th>Time</th><td>~45–60 min</td></tr>
+    <tr><th>Cost</th><td>~$99 USD</td><th>Expires?</th><td>No (fundamentals)</td></tr>
+  </table>
+  <div class="grid">
+    <div class="card center"><h3>Domain 1</h3><p>Identify AI concepts &amp; capabilities</p><span class="pill">40–45%</span></div>
+    <div class="card center"><h3>Domain 2</h3><p>Implement with Microsoft Foundry</p><span class="pill">55–60%</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>The whole course, one map</h2>
+  <pre class="mermaid">
+mindmap
+  root((AI-901))
+    Identify (40-45%)
+      Responsible AI
+      How GenAI works
+      AI workloads
+    Implement in Foundry (55-60%)
+      Deploy & prompt models
+      Foundry SDK
+      Agents
+      Text & Speech tools
+      Vision & image/video gen
+      Content Understanding
+  </pre>
+</section>
+
+<section>
+  <h2>AI workloads — scenario → capability</h2>
+  <div class="grid3">
+    <div class="card"><h3>Create</h3><p>text · images · video · code → <em>generative models</em></p></div>
+    <div class="card"><h3>Act</h3><p>tools + multi-step → <em>agent</em></p></div>
+    <div class="card"><h3>Understand text</h3><p>sentiment · entities · keywords · summary</p></div>
+    <div class="card"><h3>Speech</h3><p>STT (recognition) · TTS (synthesis)</p></div>
+    <div class="card"><h3>Vision</h3><p>classify · detect · OCR · describe</p></div>
+    <div class="card"><h3>Extract</h3><p>structured fields → <em>Content Understanding</em></p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Responsible AI — F.R.I.T.A.P.</h2>
+  <pre class="mermaid">
+flowchart TD
+  RAI[Responsible AI] --> F["Fairness: no bias"]
+  RAI --> R["Reliability & Safety: system safe"]
+  RAI --> I["Inclusiveness: everyone"]
+  RAI --> T["Transparency: disclose + limits"]
+  RAI --> A["Accountability: people answerable"]
+  RAI --> P["Privacy & Security: protect data"]
+  </pre>
+</section>
+
+<section>
+  <h2>The trap examiners love</h2>
+  <div class="grid">
+    <div class="card"><h3>Reliability &amp; Safety</h3><p>The <em>system</em> behaves correctly/safely under unexpected conditions. Rigorous testing.</p></div>
+    <div class="card"><h3>Accountability</h3><p><em>People / orgs</em> are answerable. Governance, oversight board, compliance.</p></div>
+  </div>
+  <div class="trap">"An oversight board reviews the AI's decisions and answers for them" → <strong>Accountability</strong>, not reliability.</div>
+</section>
+
+<section>
+  <h2>Check yourself</h2>
+  <div class="quiz">
+    <div class="q">A loan model approves fewer applicants of one ethnicity. Which principle is violated?</div>
+    <button class="opt" data-correct="true">Fairness</button>
+    <button class="opt" data-correct="false">Transparency</button>
+    <button class="opt" data-correct="false">Reliability &amp; safety</button>
+    <button class="opt" data-correct="false">Accountability</button>
+    <div class="explain"><b>Fairness</b> — unequal outcomes across demographic groups = bias. Transparency = disclosing it's AI; Accountability = who answers for it.</div>
+  </div>
+</section>
+
+<section>
+  <h2>How generative AI models work</h2>
+  <ul>
+    <li><strong>Token</strong> — unit of text; limits &amp; billing are token-based</li>
+    <li><strong>Embedding</strong> — numeric vector of meaning → search / RAG</li>
+    <li><strong>Transformer</strong> — architecture using <em>attention</em></li>
+    <li>LLMs <strong>predict the next token</strong> (not a DB lookup) → can <em>hallucinate</em></li>
+    <li>Fix hallucination with <strong>grounding / RAG</strong> (give it your data)</li>
+    <li><strong>Multimodal</strong> = also handles images/audio</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Microsoft Foundry — where you build</h2>
+  <pre class="mermaid">
+flowchart LR
+  A["Foundry (ai.azure.com)"] --> B[Hub] --> C[Project]
+  C --> D[Model catalog] -->|deploy| E["Deployment<br/>name + endpoint + filter"]
+  C --> G["Agents"]
+  C --> F["Tools: Speech, Content Understanding"]
+  E --> H[Endpoint] --> I["Your app (SDK/REST)"]
+  </pre>
+  <p class="muted">Hub = top workspace · Project = a solution · Deployment = a callable model.</p>
+</section>
+
+<section>
+  <h2>Deploy &amp; call a model</h2>
+  <ol>
+    <li>Model catalog → <strong>Deploy</strong> (choose type: Standard / Global Standard / PTU / Batch / Serverless)</li>
+    <li>Note the <em>deployment name</em> — this is what code references</li>
+    <li>Open the <strong>playground</strong> → set <em>system message</em> → send <em>user</em> prompt</li>
+    <li>Tune <span class="kbd">temperature</span> <span class="kbd">max_tokens</span> <span class="kbd">top_p</span></li>
+  </ol>
+  <div class="trap"><strong>temperature/top_p = randomness</strong>. <strong>max_tokens = length</strong>. Never mix them up.</div>
+</section>
+
+<section>
+  <h2>Check yourself</h2>
+  <div class="quiz">
+    <div class="q">In the SDK, what do you pass as <span class="kbd">model=</span>?</div>
+    <button class="opt" data-correct="false">The base model family (e.g., GPT-4o)</button>
+    <button class="opt" data-correct="true">The deployment name you chose</button>
+    <button class="opt" data-correct="false">The Azure region</button>
+    <button class="opt" data-correct="false">The hub name</button>
+    <div class="explain"><b>Deployment name.</b> You reference the deployment you created, reached via its endpoint (auth = key or Microsoft Entra ID).</div>
+  </div>
+</section>
+
+<section>
+  <h2>Computer vision — capabilities</h2>
+  <table>
+    <tr><th>Capability</th><th>Output</th><th>Location?</th></tr>
+    <tr><td>Image classification</td><td>whole-image label</td><td>No</td></tr>
+    <tr><td>Object detection</td><td>labels + <strong>bounding boxes</strong></td><td>Yes</td></tr>
+    <tr><td>OCR (read)</td><td>text in image</td><td>text region</td></tr>
+    <tr><td>Image description</td><td>caption / tags</td><td>mixed</td></tr>
+  </table>
+  <div class="trap">Just a label → classification. Label <strong>+ where</strong> (and multiple objects) → detection.</div>
+</section>
+
+<section>
+  <h2>How vision models work</h2>
+  <div class="grid3">
+    <div class="card"><h3>Pixels</h3><p>image = grid; convolutions find edges/shapes</p></div>
+    <div class="card"><h3>CNN</h3><p>classic deep net for classify/detect</p></div>
+    <div class="card"><h3>ViT / Multimodal</h3><p>attention over image patches; reason over image + text</p></div>
+  </div>
+  <p class="muted">In AI-901 you mostly <strong>send an image to a multimodal model</strong> and prompt it.</p>
+</section>
+
+<section>
+  <h2>Interpret an image (multimodal)</h2>
+  <pre><code class="language-python">resp = client.chat.completions.create(
+  model="gpt-4o",   # multimodal deployment
+  messages=[
+    {"role":"system","content":"Describe images for accessibility."},
+    {"role":"user","content":[
+      {"type":"text","text":"Describe this and read any text."},
+      {"type":"image_url","image_url":{"url": IMAGE_URL}}
+    ]}
+  ])
+print(resp.choices[0].message.content)</code></pre>
+  <p class="muted">The image rides inside the <strong>user</strong> message content.</p>
+</section>
+
+<section>
+  <h2>Generate images &amp; video</h2>
+  <div class="grid3">
+    <div class="card"><h3>Image-gen</h3><p>DALL·E 3 / GPT-image → still images from text</p></div>
+    <div class="card"><h3>Video-gen</h3><p>text → short video clips <span class="pill">new</span></p></div>
+    <div class="card"><h3>Multimodal</h3><p><em>understands</em> images/video as input</p></div>
+  </div>
+  <pre><code class="language-python">img = client.images.generate(model="dall-e-3",
+     prompt="A watercolor fox in snow", size="1024x1024")
+print(img.data[0].url)</code></pre>
+</section>
+
+<section>
+  <h2>Check yourself</h2>
+  <div class="quiz">
+    <div class="q">You must <em>create a short promo video</em> from a text brief. Which model type?</div>
+    <button class="opt" data-correct="false">Multimodal (vision) model</button>
+    <button class="opt" data-correct="false">Image-generation model</button>
+    <button class="opt" data-correct="true">Video-generation model</button>
+    <button class="opt" data-correct="false">Embeddings model</button>
+    <div class="explain"><b>Video-generation.</b> Multimodal <i>understands</i> visuals; image-gen makes stills; video-gen makes clips.</div>
+  </div>
+</section>
+
+<section>
+  <h2>Day 3 lab &amp; homework</h2>
+  <div class="card"><h3>Lab 1 — Deploy your first model</h3><p>Create a project → deploy GPT-4o-mini → chat in the playground → move temperature/max_tokens.</p></div>
+  <div class="card"><h3>Vision playground</h3><p>Upload a photo to GPT-4o (describe + read text); deploy an image model and generate 2 images.</p></div>
+  <p class="muted">Then: Practice Test 1, Q1–20.</p>
+</section>
+
+<section data-auto-animate>
+  <h2>Recap</h2>
+  <ul>
+    <li>AI-901 = Foundry + agents + Content Understanding + basic code</li>
+    <li>F.R.I.T.A.P. — reliability(system) ≠ accountability(people)</li>
+    <li>Tokens, embeddings, grounding fixes hallucination</li>
+    <li>Deployment name + endpoint; temperature≠length</li>
+    <li>Multimodal understands · image-gen/video-gen create</li>
+  </ul>
+  <p class="tag">Next → Day 4: Text, Speech &amp; Content Understanding</p>
+</section>
+
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>Reveal.initialize({hash:true, slideNumber:'c/t', transition:'slide', width:1180, height:720, margin:0.06});</script>
+<script src="assets/quiz.js"></script>
+</body>
+</html>

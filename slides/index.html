@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-901 FDP — Interactive Slide Decks</title>
+<link rel="stylesheet" href="assets/theme.css">
+<style>
+  body{margin:0;min-height:100vh;padding:48px 24px;box-sizing:border-box;}
+  .wrap{max-width:900px;margin:0 auto;color:var(--ink);font-family:"Segoe UI",system-ui,sans-serif;}
+  h1{font-size:2.4em;margin:0 0 .1em;color:#fff;letter-spacing:-.02em;}
+  .sub{color:var(--muted);margin-bottom:1.6em;}
+  .deck{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--border);
+    border-radius:16px;padding:18px 20px;margin:12px 0;text-decoration:none;transition:.15s;}
+  .deck:hover{border-color:var(--accent);transform:translateY(-2px);}
+  .num{font-size:1.6em;font-weight:800;background:linear-gradient(90deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text;background-clip:text;color:transparent;min-width:70px;}
+  .deck h3{margin:0;color:#fff;}
+  .deck p{margin:.2em 0 0;color:var(--muted);font-size:.9em;}
+  .links{margin-top:2em;color:var(--muted);font-size:.9em;}
+  .links a{color:var(--accent2);}
+  .hint{margin-top:1.4em;padding:.6em 1em;border-left:4px solid var(--accent);background:#0e1730;border-radius:8px;color:var(--muted);font-size:.9em;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>AI-901 FDP — Interactive Slides</h1>
+  <div class="sub">Microsoft Certified: Azure AI Fundamentals · Faculty Development Programme · 07–10 Jul 2026</div>
+
+  <a class="deck" href="day3.html"><span class="num">Day 3</span><div><h3>Foundations, Responsible AI, Foundry &amp; Vision</h3><p>Exam intro · F.R.I.T.A.P. · how GenAI works · deploy a model · CV + image/video generation</p></div></a>
+  <a class="deck" href="day4.html"><span class="num">Day 4</span><div><h3>Text, Speech &amp; Content Understanding</h3><p>Tokenization → semantic · 4 text techniques · STT/TTS · Azure Content Understanding</p></div></a>
+  <a class="deck" href="day5.html"><span class="num">Day 5</span><div><h3>Generative AI, Agents &amp; the Foundry SDK</h3><p>Prompts · SDK chat client · model config · agents (model+instructions+tools) · grounding</p></div></a>
+  <a class="deck" href="day6.html"><span class="num">Day 6</span><div><h3>Revision, Traps &amp; Mock Test</h3><p>Decision tree · top traps · memory sheets · lightning quizzes · 50-Q mock brief</p></div></a>
+
+  <div class="hint">💡 Decks are keyboard-driven: <b>→ / Space</b> next · <b>←</b> back · <b>F</b> fullscreen · <b>O</b> overview · <b>S</b> speaker notes. Click a quiz option to reveal the answer + explanation.</div>
+
+  <div class="links">
+    ← Back to <a href="../index.html">course home</a> ·
+    📚 <a href="../study-guide/00-facilitator-guide.md">Study guide</a> ·
+    🗺️ <a href="../diagrams/README.md">Diagram pack</a> ·
+    🧪 <a href="../labs/README.md">Labs</a>
+  </div>
+</div>
+</body>
+</html>

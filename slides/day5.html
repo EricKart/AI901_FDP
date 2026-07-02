@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-901 FDP · Day 5 — Generative AI, Agents &amp; the Foundry SDK</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="assets/theme.css">
+</head>
+<body>
+<div class="footer">AI-901 FDP · Day 5 · <a href="index.html">All decks</a></div>
+<div class="reveal"><div class="slides">
+
+<section>
+  <span class="pill">DAY 5 · 09-Jul</span>
+  <h1>Generative AI, Agents &amp;<br>the Foundry SDK</h1>
+  <p class="muted">The heart of AI-901 — Domain 2, 55–60% of the exam</p>
+</section>
+
+<section>
+  <h2>Prompts — the three roles</h2>
+  <table>
+    <tr><th>Role</th><th>Job</th></tr>
+    <tr><td><strong>system</strong></td><td>persona · rules · grounding · format · guardrails</td></tr>
+    <tr><td><strong>user</strong></td><td>the actual request (+ image/audio)</td></tr>
+    <tr><td><strong>assistant</strong></td><td>prior replies (context)</td></tr>
+  </table>
+  <p class="muted">Techniques: clear instructions · few-shot · grounding · output format · chain-of-thought.</p>
+  <div class="trap">Rules/grounding go in the <strong>system</strong> message — never the user message.</div>
+</section>
+
+<section>
+  <h2>Anatomy of a chat request</h2>
+  <pre class="mermaid">
+flowchart LR
+  SY["system: rules + grounding"] --> M
+  US["user: the request"] --> M
+  AS["assistant: prior turns"] --> M
+  M["Deployed model (deployment name)"] --> OUT["response.choices[0].message.content"]
+  </pre>
+  <p class="muted">Chat models are <strong>stateless per call</strong> — your app resends history.</p>
+</section>
+
+<section>
+  <h2>Lightweight chat client (Foundry SDK)</h2>
+  <pre><code class="language-python">from openai import AzureOpenAI
+client = AzureOpenAI(azure_endpoint=EP, api_key=KEY,
+                     api_version="2024-10-21")
+
+r = client.chat.completions.create(
+  model="gpt-4o-mini",             # deployment name
+  messages=[
+    {"role":"system","content":"You are a concise study coach."},
+    {"role":"user","content":"Three tips for exam nerves?"}],
+  temperature=0.7, max_tokens=300)
+print(r.choices[0].message.content)</code></pre>
+  <p class="muted">3 things to call a model: <strong>endpoint · credential · deployment name</strong>.</p>
+</section>
+
+<section>
+  <h2>Check yourself</h2>
+  <div class="quiz">
+    <div class="q">Where do you read the model's reply?</div>
+    <button class="opt" data-correct="true">response.choices[0].message.content</button>
+    <button class="opt" data-correct="false">response.deployment.name</button>
+    <button class="opt" data-correct="false">response.usage.tokens.text</button>
+    <button class="opt" data-correct="false">response.system.message</button>
+    <div class="explain">The generated text is in <b>choices[0].message.content</b>.</div>
+  </div>
+</section>
+
+<section>
+  <h2>Pick the right model</h2>
+  <div class="grid3">
+    <div class="card"><h3>Reasoning (o-series)</h3><p>complex multi-step logic/math</p></div>
+    <div class="card"><h3>Small (4o-mini/Phi)</h3><p>cheap, fast, high-volume simple</p></div>
+    <div class="card"><h3>Multimodal</h3><p>image/audio input</p></div>
+    <div class="card"><h3>Image-gen / Video-gen</h3><p>create visuals</p></div>
+    <div class="card"><h3>Embeddings</h3><p>search / similarity / RAG</p></div>
+    <div class="card"><h3>Choose by</h3><p>capability · cost · latency · context window</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Deployment types &amp; config</h2>
+  <div class="grid">
+    <div class="card"><h3>Deployment types</h3><ul>
+      <li>Standard / Global Standard (pay-go)</li>
+      <li><strong>PTU</strong> — reserved, predictable latency</li>
+      <li>Batch — async bulk</li>
+      <li>Serverless / Managed compute</li></ul></div>
+    <div class="card"><h3>Inference params</h3><ul>
+      <li><span class="kbd">temperature/top_p</span> randomness</li>
+      <li><span class="kbd">max_tokens</span> length</li>
+      <li><span class="kbd">frequency/presence penalty</span> repetition</li>
+      <li><span class="kbd">seed</span> reproducible · <span class="kbd">stop</span> halt</li></ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Check yourself</h2>
+  <div class="quiz">
+    <div class="q">Steady, high-volume production with predictable latency SLAs. Deployment type?</div>
+    <button class="opt" data-correct="false">Batch</button>
+    <button class="opt" data-correct="true">Provisioned Throughput (PTU)</button>
+    <button class="opt" data-correct="false">Free tier</button>
+    <button class="opt" data-correct="false">Serverless spot</button>
+    <div class="explain"><b>PTU</b> reserves dedicated capacity → predictable latency. Batch = async bulk; Standard = pay-go, no reservation.</div>
+  </div>
+</section>
+
+<section>
+  <h2>Agents — the equation</h2>
+  <div class="card center"><h3>Agent = model + instructions + tools (+ knowledge)</h3><p>…that can <em>plan and take actions</em>, not just reply once.</p></div>
+  <div class="grid">
+    <div class="card"><p><strong>Tools:</strong> code interpreter · file search / knowledge · function calling · grounding/search</p></div>
+    <div class="card"><p><strong>Agent vs chat:</strong> agent <em>acts with tools</em>; chat = text-in/text-out</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Agent lifecycle</h2>
+  <pre class="mermaid">
+sequenceDiagram
+  participant App
+  participant Agent
+  participant Thread
+  participant Tool
+  App->>Agent: 1 create_agent(model, instructions, tools)
+  App->>Thread: 2 create_thread()
+  App->>Thread: 3 add user message
+  App->>Agent: 4 create_and_process_run(thread, agent)
+  Agent->>Tool: (may call a tool)
+  Tool-->>Agent: result
+  Agent-->>Thread: assistant message
+  App->>Thread: 5 read messages
+  </pre>
+</section>
+
+<section>
+  <h2>Build &amp; run a single agent</h2>
+  <pre><code class="language-python">agent = project.agents.create_agent(
+  model="gpt-4o-mini", name="study-buddy",
+  instructions="You are an AI-901 tutor. Use the notes.")
+thread = project.agents.create_thread()
+project.agents.create_message(thread_id=thread.id,
+  role="user", content="Explain grounding in one line.")
+project.agents.create_and_process_run(
+  thread_id=thread.id, agent_id=agent.id)
+for m in project.agents.list_messages(thread_id=thread.id):
+  print(m.role, ":", m.content)</code></pre>
+</section>
+
+<section>
+  <h2>Check yourself</h2>
+  <div class="quiz">
+    <div class="q">Which needs an <em>agent</em> rather than a single completion?</div>
+    <button class="opt" data-correct="false">Rewrite this paragraph formally</button>
+    <button class="opt" data-correct="false">Translate one sentence</button>
+    <button class="opt" data-correct="true">Look up an order via an API tool, then email the customer</button>
+    <button class="opt" data-correct="false">Classify a review's sentiment</button>
+    <div class="explain">Tool use + multi-step action = <b>agent</b>. The others are one-shot text-in/text-out.</div>
+  </div>
+</section>
+
+<section>
+  <h2>Grounding &amp; safety</h2>
+  <div class="grid">
+    <div class="card"><h3>Grounding / RAG</h3><p>retrieve your data (embeddings + search) → add to prompt → fewer hallucinations</p></div>
+    <div class="card"><h3>Content Safety</h3><p>content filters (hate/violence/…) · <em>prompt shields</em> vs injection · evaluations</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Day 5 labs</h2>
+  <div class="card"><h3>Lab 2 — SDK chat client</h3><p>Run the Python client; change the system message + temperature.</p></div>
+  <div class="card"><h3>Lab 3 — Single agent</h3><p>Portal: agent + file-search over a PDF; then run it from the SDK.</p></div>
+  <p class="muted">Then: Practice Test 2 (live workshop).</p>
+</section>
+
+<section>
+  <h2>Recap</h2>
+  <ul>
+    <li>system=rules, user=request, read choices[0].message.content</li>
+    <li>Model by capability/cost/latency; PTU for predictable latency</li>
+    <li><strong>Agent = model + instructions + tools</strong>; lifecycle agent→thread→message→run→read</li>
+    <li>Grounding fixes hallucination; content filters + prompt shields</li>
+  </ul>
+  <p class="tag">Next → Day 6: Revision + 50-Q mock</p>
+</section>
+
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>Reveal.initialize({hash:true, slideNumber:'c/t', transition:'slide', width:1180, height:720, margin:0.06});</script>
+<script src="assets/quiz.js"></script>
+</body>
+</html>

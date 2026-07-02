@@ -1,0 +1,13 @@
+# secrets
+labs/code/.env
+.env
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# os
+Thumbs.db
+.DS_Store

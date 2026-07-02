@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-901 FDP · Day 6 — Revision, Traps &amp; Mock</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="assets/theme.css">
+</head>
+<body>
+<div class="footer">AI-901 FDP · Day 6 · <a href="index.html">All decks</a></div>
+<div class="reveal"><div class="slides">
+
+<section>
+  <span class="pill">DAY 6 · 10-Jul</span>
+  <h1>Rapid Revision, Exam Traps<br>&amp; Mock Certification Test</h1>
+</section>
+
+<section>
+  <h2>Decision tree — burn this in</h2>
+  <pre class="mermaid">
+flowchart TD
+  S([Scenario]) --> Q1{Create content?}
+  Q1 -->|text| T[Generative model]
+  Q1 -->|image| IG[Image-gen]
+  Q1 -->|video| VG[Video-gen]
+  Q1 -->|no| Q2{Act w/ tools?}
+  Q2 -->|yes| AG[Agent]
+  Q2 -->|no| Q3{Modality}
+  Q3 -->|image/audio in| MM[Multimodal]
+  Q3 -->|audio to text| STT[Speech recognition]
+  Q3 -->|text to audio| TTS[Speech synthesis]
+  Q3 -->|analyze text| TA[Text analysis]
+  Q3 -->|fields from files| CU[Content Understanding]
+  </pre>
+</section>
+
+<section>
+  <h2>Top exam traps</h2>
+  <ol>
+    <li><strong>temperature/top_p = randomness · max_tokens = length</strong></li>
+    <li>Reliability&amp;Safety (system) ≠ Accountability (people)</li>
+    <li>Code references the <strong>deployment name</strong>, not base model</li>
+    <li>Rules/grounding → <strong>system</strong> message</li>
+    <li>Multimodal <em>understands</em> · image/video-gen <em>create</em></li>
+    <li>Agent uses tools &amp; acts; chat = text-in/text-out</li>
+    <li>Structured extraction from files → <strong>Content Understanding + field schema</strong></li>
+    <li>Grounding/RAG fixes hallucination (not higher temperature)</li>
+  </ol>
+</section>
+
+<section>
+  <h2>Memory sheet — concepts</h2>
+  <div class="grid">
+    <div class="card"><h3>F.R.I.T.A.P.</h3><p>Fairness · Reliability&amp;Safety · Inclusiveness · Transparency · Accountability · Privacy&amp;Security</p></div>
+    <div class="card"><h3>GenAI</h3><p>token · embedding · transformer · predict-next-token · grounding vs hallucination · multimodal</p></div>
+    <div class="card"><h3>Config</h3><p>temp/top_p=random · max_tokens=length · penalties=repetition · seed=repeatable</p></div>
+    <div class="card"><h3>Deploy</h3><p>Standard · Global Standard · PTU(reserved) · Batch · Serverless</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Memory sheet — Foundry</h2>
+  <div class="grid">
+    <div class="card"><h3>Structure</h3><p>Hub → Project → Deployment (name+endpoint+filter)</p></div>
+    <div class="card"><h3>Chat</h3><p>messages: system/user/assistant → choices[0].message.content</p></div>
+    <div class="card"><h3>Agent</h3><p>model+instructions+tools; agent→thread→message→run→read</p></div>
+    <div class="card"><h3>Content Understanding</h3><p>analyzer + field schema; docs/images/audio/video</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Lightning round</h2>
+  <div class="quiz">
+    <div class="q">"People are answerable + a governance board oversees it" → principle?</div>
+    <button class="opt" data-correct="false">Reliability &amp; safety</button>
+    <button class="opt" data-correct="true">Accountability</button>
+    <button class="opt" data-correct="false">Transparency</button>
+    <button class="opt" data-correct="false">Fairness</button>
+    <div class="explain"><b>Accountability</b> = people/orgs answerable + governance.</div>
+  </div>
+</section>
+
+<section>
+  <h2>Lightning round</h2>
+  <div class="quiz">
+    <div class="q">Reduce hallucinations in answers about your internal policies?</div>
+    <button class="opt" data-correct="false">Raise temperature</button>
+    <button class="opt" data-correct="true">Grounding / RAG with your policy data</button>
+    <button class="opt" data-correct="false">Increase max_tokens</button>
+    <button class="opt" data-correct="false">Add a stop sequence</button>
+    <div class="explain"><b>Grounding/RAG</b> supplies retrieved facts so answers are based on your data.</div>
+  </div>
+</section>
+
+<section>
+  <h2>Lightning round</h2>
+  <div class="quiz">
+    <div class="q">Minimum to create &amp; test a <em>single agent</em> in the portal?</div>
+    <button class="opt" data-correct="false">Only a hub</button>
+    <button class="opt" data-correct="true">A model deployment + instructions (tools optional)</button>
+    <button class="opt" data-correct="false">A field schema</button>
+    <button class="opt" data-correct="false">A speech voice</button>
+    <div class="explain">An agent needs a <b>model deployment + instructions</b>; tools/knowledge are optional add-ons.</div>
+  </div>
+</section>
+
+<section>
+  <h2>Mock Certification Test</h2>
+  <div class="card"><h3>50 questions · 60 minutes · closed book</h3>
+    <p>Weighted 40/60 across the two domains. Pass ≈ <strong>35/50</strong>.</p></div>
+  <ul>
+    <li>Read "choose TWO/THREE" carefully</li>
+    <li>Name the capability first, then the Foundry way to build it</li>
+    <li>Flag &amp; return to hard items — don't stall</li>
+    <li>Sandbox the exam UI first: <span class="kbd">aka.ms/examdemo</span></li>
+  </ul>
+  <p class="muted">Then review <strong>every</strong> answer together.</p>
+</section>
+
+<section>
+  <h1 class="center">You're ready. 🎯</h1>
+  <p class="center muted">Register with a personal Microsoft account · pass = 700/1000 · cert never expires.</p>
+</section>
+
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>Reveal.initialize({hash:true, slideNumber:'c/t', transition:'slide', width:1180, height:720, margin:0.06});</script>
+<script src="assets/quiz.js"></script>
+</body>
+</html>
