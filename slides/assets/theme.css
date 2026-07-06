@@ -1,53 +1,54 @@
-/* AI-901 FDP — shared slide theme (premium dark) */
+/* AI-901 FDP — shared slide theme (clean light, projector-friendly) */
 :root{
-  --bg:#0b1020; --bg2:#121a33; --ink:#e8ecf8; --muted:#a7b0c8;
-  --accent:#5b8cff; --accent2:#22d3ee; --good:#22c55e; --bad:#f43f5e; --warn:#f59e0b;
-  --card:#161f3d; --border:#26325c;
+  --bg:#f5f7fc; --bg2:#e9eefa; --ink:#1e2433; --muted:#5a6478;
+  --accent:#2563eb; --accent2:#0e7490; --good:#16a34a; --bad:#e11d48; --warn:#d97706;
+  --card:#ffffff; --border:#d5dcec;
 }
 .reveal{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink);}
 .reveal .slides{text-align:left;}
 .reveal .slides section{background:transparent;}
-body,.reveal-viewport{background:radial-gradient(1200px 800px at 20% -10%,#1a2650 0%,var(--bg) 55%);}
-.reveal h1,.reveal h2,.reveal h3{color:#fff;letter-spacing:-.02em;text-transform:none;font-weight:800;}
+body,.reveal-viewport{background:radial-gradient(1200px 800px at 20% -10%,#dde7fb 0%,var(--bg) 55%);}
+.reveal h1,.reveal h2,.reveal h3{color:#111827;letter-spacing:-.02em;text-transform:none;font-weight:800;}
 .reveal h1{font-size:2.1em;line-height:1.05;}
 .reveal h2{font-size:1.5em;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;}
 .reveal h3{font-size:1.15em;color:var(--accent2);}
 .reveal p,.reveal li{color:var(--ink);font-size:.82em;line-height:1.35;}
-.reveal em{color:var(--accent2);font-style:normal;}
-.reveal strong{color:#fff;}
-.reveal a{color:var(--accent2);}
+.reveal em{color:var(--accent2);font-style:normal;font-weight:600;}
+.reveal strong{color:#111827;}
+.reveal a{color:var(--accent);}
 .reveal .muted{color:var(--muted);}
 .reveal ul,.reveal ol{margin-left:1em;}
 .reveal section img{border-radius:12px;}
 .pill{display:inline-block;padding:.15em .7em;border-radius:999px;font-size:.6em;font-weight:700;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));color:#0b1020;vertical-align:middle;}
-.tag{display:inline-block;padding:.1em .55em;border-radius:6px;font-size:.62em;font-weight:700;background:var(--card);border:1px solid var(--border);color:var(--muted);}
-.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:.7em 1em;margin:.35em 0;}
+  background:linear-gradient(90deg,var(--accent),var(--accent2));color:#ffffff;vertical-align:middle;}
+.tag{display:inline-block;padding:.1em .55em;border-radius:6px;font-size:.62em;font-weight:700;background:var(--bg2);border:1px solid var(--border);color:#3b4457;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:.7em 1em;margin:.35em 0;box-shadow:0 1px 3px rgba(30,36,51,.06);}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:.6em;}
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6em;}
 .center{text-align:center;}
-.kbd{font-family:Consolas,monospace;background:#0e1730;border:1px solid var(--border);border-radius:6px;padding:.05em .4em;font-size:.85em;color:var(--accent2);}
+.kbd{font-family:Consolas,monospace;background:#eef2fb;border:1px solid var(--border);border-radius:6px;padding:.05em .4em;font-size:.85em;color:#1d4ed8;}
 .reveal pre{width:100%;box-shadow:none;font-size:.55em;}
-.reveal pre code{background:#0e1730;border:1px solid var(--border);border-radius:12px;padding:1em;max-height:520px;}
+.reveal pre code{background:#f0f4fb;border:1px solid var(--border);border-radius:12px;padding:1em;max-height:520px;color:#1e2433;}
 .reveal table{font-size:.62em;}
-.reveal th{background:var(--bg2);color:#fff;}
+.reveal th{background:var(--bg2);color:#111827;}
 .reveal td,.reveal th{border-color:var(--border);padding:.35em .6em;}
-.trap{border-left:4px solid var(--warn);background:#231a08;padding:.5em .9em;border-radius:8px;margin:.4em 0;font-size:.8em;}
+.trap{border-left:4px solid var(--warn);background:#fff4e0;padding:.5em .9em;border-radius:8px;margin:.4em 0;font-size:.8em;color:#5c4300;}
+.trap strong,.trap em{color:#7a3f00;}
 .footer{position:fixed;bottom:8px;left:16px;font-size:12px;color:var(--muted);z-index:30;}
 .progress-note{position:fixed;top:10px;right:16px;font-size:12px;color:var(--muted);z-index:30;}
-.reveal .mermaid{background:#0e1730;border:1px solid var(--border);border-radius:12px;padding:.6em;}
+.reveal .mermaid{background:#ffffff;border:1px solid var(--border);border-radius:12px;padding:.6em;}
 .reveal .mermaid svg{max-height:520px;}
 
 /* ---- Interactive quiz ---- */
-.quiz{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1em 1.2em;}
-.quiz .q{font-weight:700;color:#fff;font-size:.9em;margin-bottom:.6em;}
+.quiz{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1em 1.2em;box-shadow:0 1px 3px rgba(30,36,51,.06);}
+.quiz .q{font-weight:700;color:#111827;font-size:.9em;margin-bottom:.6em;}
 .quiz .opt{display:block;width:100%;text-align:left;margin:.3em 0;padding:.55em .8em;border-radius:10px;
-  background:#0e1730;border:1px solid var(--border);color:var(--ink);cursor:pointer;font-size:.8em;transition:.15s;}
+  background:#f2f5fc;border:1px solid var(--border);color:var(--ink);cursor:pointer;font-size:.8em;transition:.15s;}
 .quiz .opt:hover{border-color:var(--accent);transform:translateX(3px);}
-.quiz .opt.correct{background:rgba(34,197,94,.18);border-color:var(--good);color:#d6ffe4;}
-.quiz .opt.wrong{background:rgba(244,63,94,.16);border-color:var(--bad);color:#ffd9e0;}
+.quiz .opt.correct{background:#e5f8ec;border-color:var(--good);color:#14532d;}
+.quiz .opt.wrong{background:#fdeaee;border-color:var(--bad);color:#881337;}
 .quiz .opt.correct::after{content:"  ✓";color:var(--good);font-weight:800;}
 .quiz .opt.wrong::after{content:"  ✕";color:var(--bad);font-weight:800;}
-.quiz .explain{display:none;margin-top:.7em;padding:.6em .8em;border-radius:10px;background:#0e1730;border:1px dashed var(--accent);font-size:.78em;color:var(--muted);}
+.quiz .explain{display:none;margin-top:.7em;padding:.6em .8em;border-radius:10px;background:#f2f5fc;border:1px dashed var(--accent);font-size:.78em;color:#3b4457;}
 .quiz .explain.show{display:block;}
-.quiz .explain b{color:var(--accent2);}
+.quiz .explain b{color:var(--accent);}

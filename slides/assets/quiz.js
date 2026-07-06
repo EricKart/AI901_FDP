@@ -41,7 +41,7 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     if (window.mermaid) {
-      window.mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose',
+      window.mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose',
         themeVariables: { fontSize: '15px' } });
     }
     wireQuizzes(document);
